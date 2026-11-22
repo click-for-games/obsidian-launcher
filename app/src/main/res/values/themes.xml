@@ -2,5 +2,6 @@
     <style name="Theme.Obsidian" parent="android:Theme.Material.Wallpaper.NoTitleBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 </resources>

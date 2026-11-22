@@ -8,10 +8,29 @@ android {
     compileSdk = 35
     defaultConfig {
         applicationId = "com.obsidian.launcher"
-        minSdk = 26
+        minSdk = 30
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.1"
+        versionCode = 2
+        versionName = "0.2"
+    }
+    signingConfigs {
+        create("obsidian") {
+            val path = System.getenv("KEYSTORE_PATH")
+            if (path != null) {
+                storeFile = file(path)
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = "obsidian"
+                keyPassword = System.getenv("KEYSTORE_PASSWORD")
+            }
+        }
+    }
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+            signingConfig = signingConfigs.getByName("obsidian")
+        }
     }
     buildFeatures { compose = true }
     compileOptions {
@@ -27,4 +46,6 @@ dependencies {
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.fragment:fragment:1.8.5")
+    implementation("androidx.biometric:biometric:1.1.0")
 }
